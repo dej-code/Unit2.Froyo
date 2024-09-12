@@ -1,16 +1,19 @@
 function processFlavors() {
-    const input = document.getElementById('flavorInput').ariaValueMax;
+    const input = document.getElementById('flavorInput').value;
+    
     const flavorsArray = input.split(',').map(flavor => flavor.trim().toLowerCase());
 
-    const flavorCounts = {};
+    const flavorList = [];
 
     flavorsArray.forEach(flavor => {
-        if (flavorCounts[flavor]) {
-            flavorCounts[flavor]++;
+        const flavorIndex = flavorList.findIndex(item => item.name === flavor);
+        
+        if (flavorIndex !== -1) {
+            flavorList[flavorIndex].count++;
         } else {
-            flavorCounts[flavor] = 1;
+            flavorList.push({ name: flavor, count: 1 });
         }
     });
 
-    console.table(flavorCounts);
+    console.table(flavorList);
 }
